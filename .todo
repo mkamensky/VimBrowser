@@ -1,0 +1,62 @@
+<todo version="0.1.19">
+    <note priority="medium" time="1101453607" done="1102178765">
+        call $uri-&gt;authority, etc, only if possible
+    </note>
+    <note priority="medium" time="1101456283" done="1101456302">
+        bullets not displayed on a new line
+    </note>
+    <note priority="medium" time="1101456299" done="1101456303">
+        markup not shown after the last link
+    </note>
+    <note priority="medium" time="1102057771" done="1102178721">
+        create directory for history file
+    </note>
+    <note priority="medium" time="1102057796" done="1102178735">
+        adopt to libwww-perl-5.802
+    </note>
+    <note priority="medium" time="1099286614">
+        write installer
+    </note>
+    <note priority="medium" time="1101453647">
+        add command to load the plugin manually
+    </note>
+    <note priority="medium" time="1125680514">
+        make under line length at most window width
+    </note>
+    <note priority="medium" time="1125680575">
+        file name suggestion when saving
+    </note>
+    <note priority="medium" time="1125832226">
+        check what happens with ps attachments
+    </note>
+    <note priority="medium" time="1126164273">
+        first time VimSearch check
+    </note>
+    <note priority="medium" time="1126165555">
+        avoid toolbar commands when not loaded (console)
+    </note>
+    <note priority="medium" time="1130706343">
+        check sending of "referer" header
+    </note>
+    <note priority="medium" time="1130709824">
+        support the "dir" attr
+    </note>
+    <note priority="medium" time="1134376706">
+        add support for application/xhtml+xml mime type
+    </note>
+    <note priority="medium" time="1138689545">
+        check what happened to SBrowse
+    </note>
+    <note priority="medium" time="1138700328">
+        add command to bookmark a link
+    </note>
+    <note priority="low" time="1096185312">
+        expand the searchUsing syntax to allow custom uri construction
+    </note>
+    <note priority="low" time="1098819832">
+        change unix specific parts in Mailcap
+    </note>
+    <note priority="verylow" time="1095967797">
+        add support for isindex elements
+    </note>
+</todo>
