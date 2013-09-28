@@ -1,3 +1,120 @@
+* Version 1.1 (Tue 15 Mar 2005 10:48:51 AM IST)
+
+Main Improvements:
+	- Added the uri history://n to access the n-th newest item in the 
+	  history. Similarly, the :History command may now accecpt a numeric 
+	  argument.
+	- The last access time for each link now appears on the history page
+	- Added the g:browser_connect_timeout variable to control when we give 
+	  up connecting to a remote site
+	- Added support for homepage in the plugin. :Browse and similar 
+	  commands can now be called with no arguments.
+	- Changed the loading of the plugin so that vim startup time is 
+	  improved.
+	- Added a command for showing the current mappings, and a command to 
+	  extend this list for user defined mappings
+	- Improved documentation and added the html version.
+
+Main code changes
+	- Changed cite markup to use synmark
+	- Using UTF-8 for all files
+	- Use the new decoded_content of HTTP::Response (when available)
+	- adapted for vim 7 (refrain from wiping out the extra buffer that was 
+	  created when using :file)
+	- use the browsedir() vim function in Vim::browse()
+
+Other changes:
+	- added explanation when content decoding fails
+	- show progress and uri on the status line (in fact, it's just the 
+	  debug output of LWP :)
+
+* Version 1.0 (Sat 20 Nov 2004 10:55:30 PM IST)
+
+Main Improvements:
+	- Added a sidebar
+	- The bookmarks can now be opened as browser pages
+	- Added menu support (context menus and the toolbar)
+	- Added support for opening content with external applications, 
+	  through mailcap files
+	- Added global history, viewable as a browser page
+	- Modifications made to the page source are now reflected in the page
+	- Added more commands for inline image handling
+	- Scheme handlers can now be vim commands, as well as external 
+	  programs.
+	- Reviewed documentation, added a glossary
+
+Main code changes
+	- The conceal patch is no longer used. The browser depends on another 
+	  plugin, synmark.vim, instead.
+	- Added the Mailcap.pm perl module, to interface mailcap files, for 
+	  running external application for content types not supported 
+	  internally. Also added corresponding functions to Vim.pm
+	- File related dialogs are now implemented using the browse() vim 
+	  function.
+	- vimbrowse.pl now opens vim in a terminal, rather than the gui one, 
+	  unless called as 'gvimbrowse' or with the "--gui" option.
+
+Other changes:
+	- Added option to not break lines, so that the text width changes when 
+	  resizing the vim window.
+	- Added mapping for browsing based on the current uri
+	- Frames are now (partially) supported
+	- <CR> in text inputs in a form will submit that form.
+	- Deal with compressed content, according to the content encoding.
+	- The B<id> attribute of any html element can be used as a fragment
+	- Added the possibility to add a bookmark of a page to any bookmarks 
+	  file, without changing the default one.
+	- Initial comments in a bookmarks file are now preserved.
+	- Followed links now appear with a different highlighting
+	- Added option to prevent the plugin from giving any messages.
+	- The headers displayed by the :ShowHeader command are now displayed 
+	  at the bottom of the page, rather than the top.
+
+* Version 0.4
+
+Main Improvements:
+	- Improved and added searching commands: Added a special bookmarks 
+	  file, _search, and commands :Search, :SearchUsing and :Keyword using 
+	  it.
+	- Encoding displayed correctly, without need to patch the (system 
+	  wide) HTML::TreeBuilder.
+	- Removed dependence of the HTML-Format bundle (now depends only on 
+	  HTML-Tree).
+	- The browser pages are not modifiable by default. This is safer, and 
+	  looks much better with the conceal patch.
+	- All input types are now supported (added file, textarea, and option 
+	  with "multiple" attribute).
+	- Added the possibility to save inline images.
+
+Main code changes:
+	- HTML::FormatText::Vim no longer depends on HTML::FormatText and on 
+	  HTML::Formatter. The only dependancy is HTML::TreeBuilder (which is 
+	  also a pre-requisit for HTML::Formatter), which appears to be much 
+	  more widely available. The full explanation is in the 
+	  HTML::FormatText::Vim pod.
+	- Using a tiny derived class of HTML::TreeBuilder, 
+	  HTML::TreeBuilder::Encode, to solve the encoding problems. This 
+	  class is defined in HTML::FormatText::Vim.
+	- VIM::Browser changes: moved much of the handling of fetching a new 
+	  page from the page class to the main package (VIM::Browser). The 
+	  %FORMAT hash now contains only formatting routines.
+
+Other changes:
+	- Added support for some extra tags: nobr, wbr, underline, dfn.
+	- vimbrowse.pl should now finally work on windows.
+	- :Reload now works correctly and prompts in case the page is a result 
+	  of posting a form.
+	- removed the few function descriptions that were available in the 
+	  documentation.
+	- The 'c' flag in the guioptions is taken into account, whenever 
+	  possible.
+	- Lots of bug fixes
+
+* Version 0.3.1
+
+Bug fix:
+	form submission requests were not handled correctly.
+
 * Version 0.3
 
 Bug fixes:
@@ -49,3 +166,5 @@ Incompatible changes:
 * Version 0.1
 
 	Initial Version
+
+vim: comments=f\:- :

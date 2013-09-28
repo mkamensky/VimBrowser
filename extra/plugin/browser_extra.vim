@@ -1,8 +1,8 @@
 " File Name: browser_extra.vim
 " Maintainer: Moshe Kaminsky
-" Last Update: September 17, 2004
+" Last Update: November 12, 2004
 " Description: extra browser commands. Part of the browser plugin.
-" Version: 0.3
+" Version: 1.1
 
 " don't run twice or when 'compatible' is set
 if exists('g:browser_extra_version') || &compatible
@@ -10,14 +10,45 @@ if exists('g:browser_extra_version') || &compatible
 endif
 let g:browser_extra_version = g:browser_plugin_version
 
-" search using google
-command! -bar -nargs=+ Google Browse http://www.google.com/search?q= <args>
+let g:browser_plugin_load = g:browser_plugin_load . ',extra.vim'
 
-" vim site stuff
+"""" searching """"
+BrowserCommand! -bar -nargs=+ -complete=custom,BrowserSearchSrvComplete 
+          \SearchUsing
+
+BrowserCommand! -bar -nargs=* Search 
+
+vnoremap <unique> <silent> <C-S> 
+      \<C-C>:
+      \call <SID>saveReg('s')<CR>gv"sy:
+      \Search <C-R>s<CR>:
+      \let @s=<SID>saveReg('s')<CR>
+
+nnoremap <unique> <C-S> :Search<CR>
+
+function! <SID>saveReg(reg)
+  let res = exists('s:saved_' . a:reg) ? s:saved_{a:reg} : ''
+  let s:saved_{a:reg} = getreg(a:reg)
+  return res
+endfunction
+
+BrowserCommand! -bar -nargs=* Keyword 
+
+nnoremap <unique> <C-K> :Keyword<CR>
+
+" search using google
+command! -bang -bar -nargs=* Google SearchUsing<bang> google <args>
+
+" dictionary search
+command! -bang -bar -nargs=? Dictionary SearchUsing<bang> dictionary <args>
+
+command! -bang -bar -nargs=* Thesaurus SearchUsing<bang> thesaurus <args> 
+
+"""" vim site stuff """"
 
 " search for a script/tip
-command! -bar -nargs=+ -complete=custom,BrowserVimSearchTypes VimSearch 
-      \call BrowserVimSearch(<q-args>)
+BrowserCommand! -bar -nargs=+ -complete=custom,BrowserVimSearchTypes 
+      \VimSearch
 
 " go to a given script/tip by number
 command! -bar -nargs=1 VimScript 
@@ -25,21 +56,14 @@ command! -bar -nargs=1 VimScript
 command! -bar -nargs=1 VimTip 
       \Browse http://vim.sourceforge.net/tips/tip.php?tip_id= <args>
 
+" completion
+
 function! BrowserVimSearchTypes(...)
   return "script\ncolorscheme\nftplugin\ngame\nindent\nsyntax\nutility\ntip"
 endfunction
 
-function! BrowserVimSearch(Args)
-  perl <<EOF
-  use VIM::Browser;
-  local $_ = VIM::Eval('a:Args');
-  my $type = $1 if s/^\s*(\w+)//o;
-  $type = '' if $type eq 'script';
-  my $uri = 'http://vim.sourceforge.net/' .
-    ( $type eq 'tip' ? 
-      'tips/tip_search_results.php?' :
-      "scripts/script_search_results.php?script_type=$type&" ) . 'keywords=';
-  VIM::Browser::browse("$uri $_");
-EOF
+function! BrowserSearchSrvComplete(Arg, CmdLine, Pos)
+  let result = BrowserCompleteBrowse(':_search:', a:CmdLine, a:Pos)
+  let result = substitute(result, ':_search:', '', 'g')
+  return result
 endfunction
-  
