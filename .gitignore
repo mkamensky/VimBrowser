@@ -1,2 +1,7 @@
 release/
 2.0/
+old/
+GAAS
+autocmd.txt
+autocmd.vim
+download_script.php

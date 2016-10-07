@@ -1,6 +1,6 @@
 # File Name: Browser.pm
 # Maintainer: Moshe Kaminsky <kaminsky@math.huji.ac.il>
-# Last modified: Fri 24 Jun 2005 09:49:01 AM IDT
+# Last modified: Fri 07 Oct 2016 09:10:49 AM IDT
 ###########################################################
 
 ############# description of this module ##################
@@ -231,7 +231,7 @@ sub hlt {
 # class is used to tie such arrays. In addition, it is associated to a file, 
 # where the history is stored.
 package VIM::Browser::History;
-use UNIVERSAL qw(isa);
+use UNIVERSAL;
 use Vim qw(debug);
 use Data::Dumper;
 use File::Basename;
@@ -1150,7 +1150,7 @@ sub isRegular {
 
 ## CONFIGURATION
 
-our $InstDir = $Vim::Variable{'s:browser_install_dir'};
+our $InstDir = $Vim::Variable{'g:browser_install_dir'};
 
 our @RunTimePath = split /,/, $Vim::Option{'runtimepath'};
 

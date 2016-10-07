@@ -1,6 +1,6 @@
 # File Name: Mailcap.pm
 # Maintainer: Moshe Kaminsky <kaminsky@math.huji.ac.il>
-# Last modified: Sat 20 Nov 2004 09:52:55 PM IST
+# Last modified: Fri 07 Oct 2016 09:01:44 AM IDT
 ###########################################################
 
 =pod
@@ -524,7 +524,7 @@ use Exporter;
 use base qw(Exporter);
 
 use File::Spec::Functions;
-use UNIVERSAL qw(isa);
+use UNIVERSAL;
 
 use subs qw(readFile);
 

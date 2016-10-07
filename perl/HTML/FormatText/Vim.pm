@@ -1,6 +1,6 @@
 # File Name: Vim.pm
 # Maintainer: Moshe Kaminsky <kaminsky@math.huji.ac.il>
-# Last Modified: Fri 27 May 2005 03:46:34 PM IDT
+# Last Modified: Fri 07 Oct 2016 09:06:50 AM IDT
 ###########################################################
 # The aim of the following minor modification is to convert the output of 
 # HTML::Parser to perl strings. Apparently, some versions do it, some don't, 
@@ -274,7 +274,7 @@ sub do_checkbox {
 
 sub input_start {
     my ($self, $node) = @_;
-    my $type = lc($node->attr('type'));
+    my $type = lc($node->attr('type') || '');
     $type = 'text' unless $type;
     my $form = $self->{'form'};
     #return 1 unless $form;
